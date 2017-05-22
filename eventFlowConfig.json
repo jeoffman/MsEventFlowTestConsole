@@ -1,0 +1,49 @@
+{
+  "inputs": [
+    // {
+    //   "type": "EventSource",
+    //   "sources": [
+    //     { "providerName": "Microsoft-Windows-ASPNET" }
+    //   ]
+    // },
+    {
+      "type": "Trace",
+      "traceLevel": "Warning"
+    }
+  ],
+  "filters": [
+    {
+      "type": "drop",
+      "include": "Level == Verbose"
+    }
+  ],
+    "outputs": [
+        {
+            "type": "StdOutput"
+        },
+        {
+            "type": "ElasticSearch",
+            "indexNamePrefix": "app1-",
+            "serviceUri": "http://172.19.234.22:9200/", //docker inspect ek_elasticsearch_1
+            //"basicAuthenticationUserName": "esUser1",
+            //"basicAuthenticationUserPassword": "<MyPassword>",
+            "eventDocumentTypeName": "diagData"
+        }
+    ],
+  "schemaVersion": "2016-08-11",
+  // "healthReporter": {
+  //   "type": "CsvHealthReporter",
+  //   "logFileFolder": ".",
+  //   "logFilePrefix": "HealthReport",
+  //   "minReportLevel": "Warning",
+  //   "throttlingPeriodMsec": "1000"
+  // },
+  // "settings": {
+  //    "pipelineBufferSize": "1000",
+  //    "maxEventBatchSize": "100",
+  //    "maxBatchDelayMsec": "500",
+  //    "maxConcurrency": "8",
+  //    "pipelineCompletionTimeoutMsec": "30000"
+  // },
+  "extensions": []
+}
